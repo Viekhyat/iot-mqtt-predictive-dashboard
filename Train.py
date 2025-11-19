@@ -7,7 +7,6 @@ from sklearn.pipeline import Pipeline
 from sklearn.calibration import CalibratedClassifierCV
 import xgboost as xgb
 import numpy as np
-
 # ===============================
 # 1. Load & Clean Data
 # ===============================
@@ -35,21 +34,18 @@ preprocessor = ColumnTransformer(
         ("cat", OneHotEncoder(handle_unknown="ignore"), categorical_features)
     ]
 )
-
 # ===============================
 # 2. Train-Test Split
 # ===============================
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42, stratify=y
 )
-
 # ===============================
 # 3. Handle Imbalance with scale_pos_weight
 # ===============================
 neg, pos = np.bincount(y_train)
 scale = neg / pos
 print(f"⚖️ Class balance: {neg} no-maintenance, {pos} maintenance → scale_pos_weight={scale:.2f}")
-
 # ===============================
 # 4. Build Model with Calibration
 # ===============================
@@ -63,21 +59,18 @@ xgb_model = xgb.XGBClassifier(
     subsample=0.8,
     colsample_bytree=0.8
 )
-
 calibrated_model = CalibratedClassifierCV(xgb_model, cv=3, method="sigmoid")
 
 clf = Pipeline(steps=[
     ("preprocessor", preprocessor),
     ("classifier", calibrated_model)
 ])
-
 # ===============================
 # 5. Train Model
 # ===============================
 print("⏳ Training model...")
 clf.fit(X_train, y_train)
 print("✅ Training complete.")
-
 # ===============================
 # 6. Save Model + Test Data
 # ===============================
@@ -90,23 +83,18 @@ y_test.to_csv("y_test.csv", index=False)
 # ===============================
 # Predict probabilities
 y_proba = clf.predict_proba(X_test)[:, 1]
-
 # Debug check
 print("🔎 Sample probabilities:", y_proba[:20])
 print("⚖️ Mean probability:", y_proba.mean())
-
 # Set your threshold
 threshold = 0.55
 y_pred_custom = (y_proba >= threshold).astype(int)
-
 # Save predictions
 np.savetxt("y_pred_custom.csv", y_pred_custom, delimiter=",", fmt="%d")
-
 # ===============================
 # 8. Report
 # ===============================
 from sklearn.metrics import classification_report, confusion_matrix
-
 print(f"\n✅ Custom threshold applied: {threshold}")
 print("📊 Classification Report:\n", classification_report(y_test, y_pred_custom))
 print("📉 Confusion Matrix:\n", confusion_matrix(y_test, y_pred_custom))
