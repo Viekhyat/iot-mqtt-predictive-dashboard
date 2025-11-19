@@ -1,0 +1,53 @@
+/* Background with gradient */
+.stApp {
+    background: linear-gradient(135deg, #1f1c2c, #928DAB);
+    background-attachment: fixed;
+    color: #ffffff;
+}
+
+/* Headings */
+h1, h2, h3 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+}
+
+/* Info/metric cards with 3D effect */
+.stMetric, .stAlert, .stDataFrame {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 12px;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.4),
+                -5px -5px 15px rgba(255,255,255,0.1);
+    backdrop-filter: blur(8px);
+}
+
+/* Sidebar */
+section[data-testid="stSidebar"] {
+    background: rgba(30,30,40,0.9);
+    border-radius: 15px;
+}
+
+/* Buttons */
+.stButton>button {
+    background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+    color: white;
+    border-radius: 12px;
+    padding: 10px 20px;
+    font-weight: bold;
+    box-shadow: 2px 4px 12px rgba(0,0,0,0.4);
+    transition: all 0.3s ease-in-out;
+}
+.stButton>button:hover {
+    transform: scale(1.05);
+    box-shadow: 4px 8px 20px rgba(0,0,0,0.6);
+}
+
+/* Tables */
+.stTable {
+    border-radius: 12px;
+    overflow: hidden;
+}
+.stTable table {
+    width: 100%;
+    border-collapse: collapse;
+}
