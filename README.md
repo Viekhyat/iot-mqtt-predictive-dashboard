@@ -45,6 +45,18 @@ Expected artifacts after a successful run:
 
 ---
 
+## Requirements
+
+Install dependencies from `requirements.txt` (recommended). From PowerShell:
+
+```powershell
+pip install -r requirements.txt
+```
+
+The repository includes a minimal `requirements.txt` listing the packages used by the project. Pin versions for reproducible environments if you plan to share or deploy.
+
+---
+
 ## How `Train.py` works (summary)
 
 - Loads `iiot_dataset.xlsx` and normalizes column names (strips spaces and special characters).
@@ -127,7 +139,9 @@ python .\IOT\fake_publisher.py
 
 ## License
 
-Add your preferred license (e.g., MIT) in a `LICENSE` file if you plan to publish this repository.
+This project is released under the MIT License — see the included `LICENSE` file for details.
+
+---
 
 ---
 

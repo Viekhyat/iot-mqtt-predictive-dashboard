@@ -1,0 +1,11 @@
+undpandas
+scikit-learn
+xgboost
+joblib
+openpyxl
+numpy
+
+# Optional / recommended
+matplotlib
+jupyter
+pytest
